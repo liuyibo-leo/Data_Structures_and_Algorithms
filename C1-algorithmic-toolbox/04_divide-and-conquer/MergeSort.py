@@ -8,7 +8,7 @@ def _mergeSort(arr, begin, end):
         return
 
     mid = (end-1) // 2 #(end - 1) means to get the actual position.
-    _mergeSort(arr, 1, mid) #
+    _mergeSort(arr, 1, mid)
     _mergeSort(arr, mid+1, end)
     Merge(arr, 1, mid, end)
 
