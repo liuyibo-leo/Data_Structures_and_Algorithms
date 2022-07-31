@@ -1,37 +1,27 @@
-def MergeSort(arr):
-    n = len(arr)
-    _mergeSort(arr, 0, n-1)
+def mergeSort(lst):
+    if len(lst) <= 1:
+        return lst
 
-def _mergeSort(arr, begin, end):
+    mid = len(lst) // 2
+    left = mergeSort(lst[:mid])
+    right = mergeSort(lst[mid:])
 
-    if begin >= end:
-        return
+    return Merge(left, right)
 
-    mid = (end-1) // 2 #(end - 1) means to get the actual position.
-    _mergeSort(arr, 1, mid)
-    _mergeSort(arr, mid+1, end)
-    Merge(arr, 1, mid, end)
+def Merge(left, right):
+    l, r = 0, 0
+    result = []
 
-def Merge(arr, begin, mid, end):
-
-    arr_Copy = arr
-
-    i, j = begin, mid+1
-
-    for k in range(begin, end+1): #end+1 means to get the actual position
-        if i > mid:
-            arr[k] = arr_Copy[j - 1]
-            j += 1
-        elif j > end:
-            arr[k] = arr_Copy[i - 1]
-            i += 1
-        # compare each of the two sets (divided by 2, to find the mid) of the array one position by position of the two sub-arrays
-        elif arr_Copy[i - 1] < arr_Copy[j - 1]:
-            arr[k] = arr_Copy[i - 1]
-            i += 1
+    while l < len(left) and r < len(right):
+        if left[l] <= right[r]:
+            result.append(left[l])
+            l += 1
         else:
-            arr[k] = arr_Copy[j - 1]
-            j += 1
+            result.append(right[r])
+            r += 1
 
+    result += list(left[l:]) #if 'l' is greater than the len's range, the 'left[l:]' will return nothing.
+    result += list(right[r:]) #if 'r' is greater than the len's range, the 'right[r:]' will return nothing.
+    return result
 
-
+print(mergeSort([8,4,5,7,1,3,6,2]))
