@@ -3,8 +3,8 @@ def mergeSort(lst):
         return lst
 
     mid = len(lst) // 2
-    left = mergeSort(lst[:mid])
-    right = mergeSort(lst[mid:])
+    left = mergeSort(lst[:mid]) #the Merge function's result will also return to 'left'
+    right = mergeSort(lst[mid:]) #the Merge function's result will also return to 'right'
 
     return Merge(left, right)
 
@@ -24,4 +24,4 @@ def Merge(left, right):
     result += list(right[r:]) #if 'r' is greater than the len's range, the 'right[r:]' will return nothing.
     return result
 
-print(mergeSort([8,4,5,7,1,3,6,2]))
+print(mergeSort([8,4,5,7,1,3,6,2,9,8]))
