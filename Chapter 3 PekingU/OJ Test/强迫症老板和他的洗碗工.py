@@ -46,6 +46,8 @@ def disWashing(data):
         print('Yes')
     else:
         print('No')
+
+ 
 disWashing(list(map(int, input())))
 
 
