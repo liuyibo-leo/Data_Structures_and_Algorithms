@@ -10,26 +10,18 @@
 # 4 5 3 6 2 7 9 10 8 1
 # 时间限制：500ms内存限制：32000kb
 
-# 思路
-# 看了隔壁大佬的代码，感觉我的程序思路有点复杂。我尽力了
-# 想要后序遍历的输出，就从最左侧的叶子结点开始输出。用递归的方法比较简便，如果检测到这个嵌套列表的第一项类型是int，就说明它是根节点。那么就一直向下递归，遍历这个列表后面的元素…直到，检测到某个嵌套列表的第一项类型是list，并且长度为1 ，就是检测到最底部、最左侧的叶子结点了。
-
-# 把这个子树的叶子结点从左至右依次存储入输出列表中，然后把子树的根节点放输出列表最后。就完成后序遍历啦。
-
-
-output = []
-def multi_way_tree(lst):
-    if type(lst) == list and len(lst) == 1:#递归结束条件
-        output.append(lst[0])
+def postorderTree(tree):
+    if len(tree) == 1:
+        return tree
     else:
-        for i in range(len(lst)):
-            if type(lst[0]) == int:
-                multi_way_tree(lst[1:])
-                output.append(lst[0])
-                break #需要结束循环
-            else:
-                multi_way_tree(lst[i])
-    return output
+        result = []
+        for i in range(1, len(tree)):
+            result += postorderTree(tree[i])
+        result += [tree[0]]
+        return result
+
 
 lst = eval(input())
-print(*multi_way_tree(lst))
+postorder = postorderTree(lst)
+print(*postorder)
+
